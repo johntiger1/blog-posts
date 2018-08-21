@@ -4,8 +4,8 @@ Implementation of Character-Level Language Model on names.
 # Load packages
 import numpy as np
 
-
-def initialize_parameters(vocab_size, hidden_layer_size):
+import pickle
+def initialize_parameters(vocab_size, hidden_layer_size, load=False):
     """
     Initialze model's parameters. biases will be initialzed to zeros and
     weights will be initialized to small random numbers from standard normal
@@ -35,6 +35,11 @@ def initialize_parameters(vocab_size, hidden_layer_size):
     parameters["b"] = np.zeros((hidden_layer_size, 1))
     parameters["Why"] = np.random.randn(vocab_size, hidden_layer_size) * 0.01
     parameters["c"] = np.zeros((vocab_size, 1))
+    
+    if load:
+        # load the saved parameters from disk for example
+        with open("sample_file.pk1", "rb") as model_file:
+            parameters = pickle.load(model_file)
 
     return parameters
 
